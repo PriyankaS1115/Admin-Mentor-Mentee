@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentee Dashboard - Mentor Admin Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="mentee.html">
+                <i class="fas fa-graduation-cap me-2"></i>Mentor Admin Platform
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span class="nav-link text-white">
+                            <i class="fas fa-user-circle me-2"></i><span id="username">Mentee User</span>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#" onclick="logout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="h2 fw-bold text-dark">
+                    <i class="fas fa-tasks text-primary me-3"></i>Your Queries Dashboard
+                </h1>
+                <p class="text-muted">Submit and track your mentoring queries</p>
+            </div>
+        </div>
+
+        <!-- Submit Query Form -->
+        <div class="row mb-4">
+            <div class="col-lg-8 mx-auto">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-plus-circle me-2"></i>Submit New Query
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="queryForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="employeeName" class="form-label">Employee Name *</label>
+                                    <input type="text" class="form-control" id="employeeName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="employeeId" class="form-label">Employee ID *</label>
+                                    <input type="text" class="form-control" id="employeeId" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="questionTitle" class="form-label">Question Title *</label>
+                                <input type="text" class="form-control" id="questionTitle" placeholder="Brief title of your query" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="category" class="form-label">Category *</label>
+                                    <select class="form-select" id="category" required>
+                                        <option value="">Select Category</option>
+                                        <option value="Technical">Technical</option>
+                                        <option value="Career">Career Guidance</option>
+                                        <option value="Project">Project Help</option>
+                                        <option value="Development">Professional Development</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="complexity" class="form-label">Complexity Level *</label>
+                                    <select class="form-select" id="complexity" required>
+                                        <option value="">Select Complexity</option>
+                                        <option value="low">Low</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="high">High</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="meetingType" class="form-label">Meeting Type *</label>
+                                    <select class="form-select" id="meetingType" required>
+                                        <option value="">Select Meeting Type</option>
+                                        <option value="Virtual">Virtual Meeting</option>
+                                        <option value="InPerson">In-Person</option>
+                                        <option value="Email">Email Consultation</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="preferredSlot" class="form-label">Preferred Time Slot *</label>
+                                    <select class="form-select" id="preferredSlot" required>
+                                        <option value="">Select Slot</option>
+                                        <option value="morning">Morning (9 AM - 12 PM)</option>
+                                        <option value="afternoon">Afternoon (12 PM - 3 PM)</option>
+                                        <option value="evening">Evening (3 PM - 6 PM)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="detailedQuery" class="form-label">Detailed Query *</label>
+                                <textarea class="form-control" id="detailedQuery" rows="5" placeholder="Provide detailed information about your query" required></textarea>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="reset" class="btn btn-outline-secondary">Clear</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane me-2"></i>Post Query
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Queries List -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list me-2"></i>My Queries
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="queriesList" class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Complexity</th>
+                                        <th>Status</th>
+                                        <th>Assigned Mentor</th>
+                                        <th>Created Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="queriesBody">
+                                    <tr>
+                                        <td colspan="7" class="text-center text-muted py-4">
+                                            <i class="fas fa-inbox me-2"></i>No queries yet. Submit one above!
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Query Detail Modal -->
+    <div class="modal fade" id="queryDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Query Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="queryDetailContent">
+                    <!-- Content loaded dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/mentee.js"></script>
+</body>
+</html>
